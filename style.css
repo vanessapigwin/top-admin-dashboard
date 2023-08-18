@@ -9,9 +9,9 @@
     --l-gray: rgb(41,41,41);
 }
 
-* {
+/* * {
     border: solid 1px blue;
-}
+} */
 
 * {
     margin: 0;
@@ -85,18 +85,22 @@ li,
 
 .notification .user-name {
     flex: 0.75;
-    text-align: center;
+    text-align: left;
 }
 
 .greeting {
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-flow: column;
+    align-items: center;
+    margin: 0 var(--card-gap);
+    gap: calc(2*var(--card-gap));
 }
 
-.greeting > div {
-    flex: 1;
+.profile-card {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
 }
 
 .announcements, 
@@ -109,9 +113,8 @@ li,
 .announcements > .card-container,
 .trending > .card-container {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap:var(--card-gap);
+    display: grid;
+    gap: var(--card-gap);
 }
 
 .projects {
@@ -124,7 +127,23 @@ li,
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-/* style */
+.projects > .card-container > .card {
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.icon-tray {
+    margin-left: auto;
+    margin-top: auto;
+    padding-top: 10px;
+    display: flex;
+    justify-content: right;
+    gap: none;
+}
+
+/* STYLE*/
 .container {
     color: #ccc;
     background-color: var(--gray);
@@ -150,26 +169,61 @@ li,
     align-self: center;
 }
 
-.option > img,
-.section > img {
+img {
     width:40px;
     height:40px;
     margin-right: 20px;
-    align-self: center;
 }
 
-.header {
-    background-color: var(--gray);
+li,
+button,
+.notification > img:first-of-type {
+    cursor: pointer;
 }
 
-.header > * > img {
-    width:40px;
-    height:40px;
-    margin: auto;
+li:hover {
+    translate: 10px;
+    font-weight: bold;
+    color:white;
+    transition: 0.2s ease-in;
+}
+
+li:hover > img {
+    filter: invert(1);
+}
+
+p {
+    line-height: 1.3rem;
+}
+
+.option > img,
+.section > img,
+.search > img,
+.card > div > img,
+.notification > img:first-of-type {
+    filter: invert(0.7);
+}
+
+button {
+    background-color: var(--accent);
+    color: var(--gray);
+    font-size: 1rem;
+    font-weight: bold;
+    height: 50px;
+    width: 120px;
+    border-radius: 25px;
+    border: none;
+}
+
+button:hover {
+    box-shadow: 0 8px 8px 0 rgb(251, 126,20, 0.2), 0 -8px 8px 0 rgb(251, 126,20, 0.2);
+    scale: 1.05;
+    transition: 0.2s ease-in;
 }
 
 .announcements .card-container,
-.trending .card-container {
+.trending .card-container,
+.projects >.card-container > .card {
     padding: 20px;
     background-color: var(--l-gray);
     border-radius: 10px;
@@ -184,19 +238,50 @@ li,
     margin-bottom: 10px;
 }
 
-.user-name {
+.user-name,
+.personnel-tag {
+    font-size: 1rem;
     font-weight: bold;
+}
+
+.user-name.personnel-name {
+    font-size: 1.4rem;
 }
 
 .header > * > .user-picture,
 .user-picture {
     height: 65px;
     width: 65px;
+    margin-right: 1em;
     object-fit: cover;
     border-radius: 100%;
 }
 
 .card-title {
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #ddd;
+}
+
+.card > div > img {
+    width: 25xp;
+    height: 25px;
+    cursor: pointer
+}
+
+.projects >.card-container > .card:hover {
+    scale: 1.05;
+    transition: 0.2s ease-in;
+    background-color: rgb(255,255,255, 0.2);
+}
+
+input {
+    background-color: var(--l-gray);
+    border: solid 1px var(--gray);
+    border-radius: 1em;
+    padding: 4px;
+    color: #ccc;
+    font-size: 1em;
+    height: 2em;
 }
